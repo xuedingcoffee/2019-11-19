@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品排序</title>
+    <link rel="stylesheet" href="css/sppx.css">
+</head>
+
+<body>
+    <section class="box">
+        <nav id="na">
+            <span>排序</span>
+            <a href="javascript:;" data-name='time'>
+
+                <li class="up"></li>
+                <li class="down"></li>
+                上架时间
+            </a>
+            <a href="javascript:;" data-name='hot'>
+
+                <li class="up"></li>
+                <li class="down"></li>
+                热度
+            </a>
+            <a href="javascript:;" data-name='price'>
+
+                <li class="up"></li>
+                <li class="down"></li>
+                价格
+            </a>
+
+        </nav>
+        <ul class="list" id="ul">
+
+        </ul>
+
+    </section>
+</body>
+<script src="tools.js"></script>
+<script>
+    /*
+     要想解决网页速度，就要解决图片的加载速度
+
+    */
+
+    const { log } = console;
+    fetch('./json/product.json')
+        .then(a => a.json())
+        .then(data => {
+            let dataCopy = data.slice();
+            log(dataCopy)
+            //渲染函数
+            function render(arr) {
+                let str = dataCopy.map(({ title, hot, time, price, img }) => {
+                    return `
+                    <li>
+                        
+                        <img data-src="${img}" alt="">
+                        <p title='${title}'>商品名称<span>${title.substr(0, 6)}</span></p>
+                        <p>商品上架<span>${time}</span></p>
+                        <p>热度<span>${hot}</span></p>
+                        <p>价格<span>${price}</span></p>
+                    </li> 
+                    `
+                }).join('');
+                ul.innerHTML = str;
+            }
+            render(dataCopy);
+        
+            /*
+                可视区的高度，滚动条的距离，每张图片的绝对位置
+            */
+            //可视区的高度
+            const ih = window.innerHeight;
+            const li = document.querySelectorAll('#ul li');  //获取li
+            const t1 = new Tools;
+            //
+            window.onscroll = function fn() {
+                //滚动条的距离
+                console.log(window.pageYOffset);
+                //每张图片的绝对位置             
+                li.forEach((ele, i) => {
+                    let { l, t } = t1.position(ele);
+
+                    if (ih + window.pageYOffset >= t) {
+                        ele.children[0].src = ele.children[0].dataset.src;
+                    }
+                    //console.log(t)
+                })
+            }
+    })
+         
+            
+        
+
+
+
+            
+
+
+
+
+
+
+
+</script>
+
+</html>

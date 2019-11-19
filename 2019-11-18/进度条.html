@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100%;
+            height: 10px;
+            border: 1px solid pink;
+        }
+
+        #box2 {
+            width: 0;
+            height: 10px;
+            background: gray;
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+    <script>
+        //加载事件  onload
+        //加载图片，从左往右，循环数组的每一项
+        let ary = [
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-159497091.jpg',
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-152360031.jpg',
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-153725613.jpg',
+            'https://goss.veer.com/creative/vcg/veer/800water/veer-153779846x.jpg'
+        ]
+
+        //循环数组里的每一项img,连着加载
+        let num = 1;
+        ary.forEach(img => {
+
+            //创建img标签
+            let pic = document.createElement('img')
+            //img标签的连接等于数组里的每一项
+            pic.src = img
+            //来时25%一段的加载，触发加载事件
+            pic.onload = function () {
+
+                //3s，box2加载完
+                box2.style.width = 25 * (num++) + '%';
+                box2.style.transition = '3s'
+                if (25 * (num++) === 100) {
+                    //3s，body的背景颜色加载完
+                    body.style.transition = '3s'
+                    body.style.background = 'hotpink'
+                }
+            }
+
+
+
+
+        })
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="box"></div>
+        <script>
+         const pic=document.createElement('img')
+         pic.src='img/1a.jpg'
+         pic.onload=function(){
+            console.log('成功')
+         }
+         //
+         pic.onerror=function(){
+            console.log('失败')
+            pic.src='img/1.jpg'
+         }
+         box.append(pic)  //append在box中追加img元素
+
+        </script>
+   
+</body>
+</html>

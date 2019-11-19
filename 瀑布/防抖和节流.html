@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body style="height:3000px">
+    <script>
+        /*
+        
+            //debounce  有两个参数，第一个是回调函数，第二个是延迟时间   debounce(1,2)
+            第一个:（停下来才触发）  防抖
+                当频率很高触发事件的的时候都不执行事件函数中的代码，
+                [只有停下来的时候再执行]
+    
+    
+            
+         //
+            第二个:（降频率） 节流
+                每隔固定时间执行一次事件函数中的代码（0-100  10）
+                
+                比如每隔200s
+        */
+        //只有停下来的时候再执行
+
+        //window.onscroll 
+        document.onclick=debounce(fn, 200);  //回调函数和延迟时间   跟着函数执行，执行的话必须返回一个函数，有一个return返回值，return返回值就是肚子里的函数
+        function fn(ev) {
+            console.log(ev)
+            console.log(this)  //原指的是window  但是有时触发的是document事件，正常的就该是document
+        }
+        function debounce(callback, time) {
+            let timer;
+
+            return function (...arg) {
+              console.log(this) 
+                //当事件触发的时候就先关闭上次的timer
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {//箭头函数的this指的是上下文
+                    callback(...arg);
+                   callback.call(this,...arg);
+                }, time)
+            }
+
+        }
+
+
+
+
+
+
+
+
+       
+
+    </script>
+</body>
+
+</html>

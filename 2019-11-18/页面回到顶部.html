@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            background: red;
+            right: 0;
+            top: 100%;
+            text-align: center;
+            position: absolute;
+            cursor: pointer;
+
+        }
+
+        body {
+            height: 3000px;
+            _overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">回到顶部</div>
+    <script>
+        //scrollHeight  是被内容撑开的高度
+        //scrollTop  是滚动条的距离
+        //滚轮事件：onscroll
+        //offsetTop 绝对位置才是最稳的一个距离（当前元素到页面顶部的距离）
+        //盒子距顶的距离
+        const {offsetTop} = box;
+        //滚动条事件
+        onscroll = function () {
+         
+            let {scrollTop}=document.documentElement;
+            //距顶距离小于滚动条距离，就会固定在body中间
+            if (offsetTop <= scrollTop) {
+                box.style.position = 'fixed';
+                box.style.top = '50%';
+            }
+            else {
+                box.style.position = 'absolute';
+                box.style.top = '100%';
+            }
+
+            //点击方框，置顶
+            box.onclick=function(){
+                box.style.top = 0;
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
